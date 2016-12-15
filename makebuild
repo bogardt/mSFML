@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ -f msfml ]; then
+    rm msfml
+fi
+if [ -d build ]; then
+    cd build; make -j4; cd ..; ./msfml
+else
+    ls && mkdir build && cd build && cmake .. && make -j4 && cd .. && ls
+fi
