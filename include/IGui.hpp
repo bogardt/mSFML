@@ -1,6 +1,5 @@
 //
-// Made by kama
-// email   thomas.bogard@epitech.eu
+// mSFML
 //
 
 #ifndef			__IGUI__HPP__

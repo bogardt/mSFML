@@ -1,6 +1,5 @@
 //
-// Made by kama
-// email   thomas.bogard@epitech.eu
+// mSFML
 //
 
 #ifndef			__TEXTUREMANAGER_HPP__

@@ -1,11 +1,5 @@
 //
-// TextureManager.cpp for RType in /home/mikaz3/Tek3/B5/AdvancedCpp/cpp_rtype/mSFML/includes
-//
-// Made by Thomas Billot
-// Login   <mikaz3@epitech.net>
-//
-// Started on  Sat Nov 19 11:34:37 2016 Thomas Billot
-// Last update Mon Nov 28 16:57:51 2016 bogard_t
+// mSFML
 //
 
 #include <cstdio>

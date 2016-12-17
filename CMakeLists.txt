@@ -1,6 +1,5 @@
 ##
-## Made by kama
-## email   thomas.bogard@epitech.eu
+## mSFML
 ##
 
 cmake_minimum_required(VERSION 3.5)

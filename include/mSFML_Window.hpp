@@ -1,11 +1,5 @@
 //
-// mSFML_Window.hpp for mSFML in /home/mikaz3/Tek3/B5/AdvancedCpp/cpp_rtype/mSFML
-//
-// Made by Thomas Billot
-// Login   <mikaz3@epitech.net>
-//
-// Started on  Wed Nov 16 17:07:01 2016 Thomas Billot
-// Last update Tue Dec  6 15:06:32 2016 Thomas Billot
+// mSFML
 //
 
 #ifndef		__MSFML__WINDOW__HPP__

@@ -1,3 +1,7 @@
+//
+// mSFML
+//
+
 # include "mSFML_Window.hpp"
 
 int             main(int, char *[])
