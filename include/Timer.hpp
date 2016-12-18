@@ -27,7 +27,7 @@ public:
       TIMER_OUT = 2
     };
 
-  void                                  resetState();
+  void                                  reset();
   void					setState(const Timer::State& timerState);
   const Timer::State&			getState() const;
   unsigned int				timeLeft();

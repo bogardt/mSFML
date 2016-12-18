@@ -18,7 +18,7 @@ Timer::~Timer()
 {
 }
 
-void                    Timer::resetState()
+void                    Timer::reset()
 {
   _timerState = Timer::State::NONE;
 }
