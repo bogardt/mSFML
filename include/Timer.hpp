@@ -1,11 +1,5 @@
 //
-// Timer.hpp for Gomoku in /home/bogard_t/rendu/tek3/Gomoku/includes
-//
-// Made by bogard_t
-// Login   <bogard_t@epitech.net>
-//
-// Started on  Tue Dec  6 02:15:39 2016 bogard_t
-// Last update Tue Dec  6 02:20:41 2016 bogard_t
+// mSFML
 //
 
 #ifndef		_TIMER_HPP_
