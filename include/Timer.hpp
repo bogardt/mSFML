@@ -27,14 +27,15 @@ public:
       TIMER_OUT = 2
     };
 
+  void                                  resetState();
   void					setState(const Timer::State& timerState);
   const Timer::State&			getState() const;
   unsigned int				timeLeft();
-  bool				        currentTimer(const unsigned int timer);
+  bool				        timerIn(const unsigned int timer);
 
 private:
-  std::chrono::system_clock::time_point _lastTick;
   std::chrono::system_clock::time_point	_now;
+  std::chrono::system_clock::time_point _then;
   State					_timerState;
 };
 

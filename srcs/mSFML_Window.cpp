@@ -207,6 +207,24 @@ void			mSFML_Window::setTextureAt(const std::string &path,
   this->_window.draw(sprite);
 }
 
+void			mSFML_Window::setTextureRecAt(const std::string &path,
+                                                      const float x, const float y,
+                                                      const float h1, const float w1,
+                                                      const float h2, const float w2,
+                                                      const float scale)
+{
+  sf::Sprite		sprite;
+  const sf::Texture	*texture;
+
+  if (!(texture = _manager.load(path)))
+    throw std::out_of_range("Failed to load texture " + path);
+  sprite.setTexture(*texture);
+  sprite.setTextureRect(sf::IntRect(h1, w1, h2, w2));
+  sprite.setPosition(sf::Vector2f(x, y));
+  sprite.setScale(scale, scale);
+  this->_window.draw(sprite);
+}
+
 /*
 ** Fill Rectangle
 */

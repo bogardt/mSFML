@@ -94,6 +94,11 @@ public:
   virtual void	        setTextureAt(const std::string &path,
 				     const float x, const float y,
 				     const float scale = 1.) = 0;
+  virtual void	        setTextureRecAt(const std::string &path,
+                                        const float x, const float y,
+                                        const float h1, const float w1,
+                                        const float h2, const float w2,
+                                        const float scale = 1.) = 0;
   virtual void	        fillRec(const unsigned int x,
 				const unsigned int y,
 				const unsigned int i,
