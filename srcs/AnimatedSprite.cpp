@@ -50,13 +50,13 @@ AnimatedSprite::AnimatedSprite(IGui &gui,
 AnimatedSprite::~AnimatedSprite()
 {}
 
-AnimatedSprite &AnimatedSprite::setX(const unsigned int x)
+AnimatedSprite &AnimatedSprite::setX(const float x)
 {
   _x = x;
   return (*this);
 }
 
-AnimatedSprite &AnimatedSprite::setY(const unsigned int y)
+AnimatedSprite &AnimatedSprite::setY(const float y)
 {
   _y = y;
   return (*this);

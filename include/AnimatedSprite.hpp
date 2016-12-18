@@ -28,16 +28,18 @@ public:
 
   ~AnimatedSprite();
 
-  AnimatedSprite &setX(const unsigned int x);
-  AnimatedSprite &setY(const unsigned int y);
+  AnimatedSprite &setX(const float x);
+  AnimatedSprite &setY(const float y);
+  float  getX() const {return _x;}
+  float  getY() const {return _y;}
   void		update();
 
 private:
   IGui		&_gui;
   Timer		_timer;
   const std::string _path;
-  unsigned int	_x;
-  unsigned int	_y;
+  float         _x;
+  float         _y;
   unsigned int	_initFrame;
   unsigned int	_nbFrames;
   unsigned int	_timerTotal;
