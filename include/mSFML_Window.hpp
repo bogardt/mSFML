@@ -69,10 +69,17 @@ public:
                                   const unsigned int x2,
                                   const unsigned int x3,
                                   const unsigned int x4);
+  virtual void          addFrame(Animation &animation,
+                                 const unsigned int x1,
+                                 const unsigned int x2,
+                                 const unsigned int x3,
+                                 const unsigned int x4);
   virtual void          updateAnimatedSprite(Animation &currentAnimation,
                                              AnimatedSprite &animatedSprite,
                                              const float x,
                                              const float y);
+  virtual void          moveAnimatedSprite(AnimatedSprite &animatedSprite,
+                                           const float x, const float y);
 
   /*
   ** Texture methods

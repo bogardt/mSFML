@@ -82,8 +82,7 @@ mSFML_Window::~mSFML_Window() {}
 */
 void			mSFML_Window::update(void)
 {
-  sf::Time frameTime = _frameClock.restart();
-  _frameTime = frameTime;
+  _frameTime = _frameClock.restart();
 }
 
 bool			mSFML_Window::isAlive(void)
@@ -223,20 +222,34 @@ void                    mSFML_Window::addFrames(Animation &animation,
     animation.addFrame(i * x1, x2, x3, x4);
 }
 
+void                    mSFML_Window::addFrame(Animation &animation,
+                                               const unsigned int x1,
+                                               const unsigned int x2,
+                                               const unsigned int x3,
+                                               const unsigned int x4)
+{
+  animation.addFrame(x1, x2, x3, x4);
+}
+
 void                    mSFML_Window::updateAnimatedSprite(Animation &currentAnimation,
                                                            AnimatedSprite &animatedSprite,
                                                            const float x,
                                                            const float y)
 {
   animatedSprite.play(currentAnimation);
-  animatedSprite.move(x * _frameTime.asSeconds(), y * _frameTime.asSeconds());
+  animatedSprite.setPosition(x, y);
   animatedSprite.update(_frameTime);
   this->_window.draw(animatedSprite);
 }
 
+void                    mSFML_Window::moveAnimatedSprite(AnimatedSprite &animatedSprite,
+                                                         const float x, const float y)
+{
+  animatedSprite.move(x * _frameTime.asSeconds(), y * _frameTime.asSeconds());
+}
 
 /*
-** Textures
+** textures
 */
 void			mSFML_Window::setTextureAt(const std::string &path,
 						   const float x, const float y,

@@ -20,6 +20,18 @@ int		main(int, char *[])
   AnimatedSprite animatedSprite2(0.1, true, false);
   animatedSprite2.setPosition(800 / 2 + 200, 600 / 2);
 
+  Animation monster3 = gui->loadAnimation("./animatedSprites/r-typesheet30.gif");
+  // gui->addFrames(monster3, 4, 187, 209, 147, 209);
+  gui->addFrame(monster3, 20, 209, 167, 209);
+  gui->addFrame(monster3, (167*1) + 15, 209, 167 - 5, 209);
+  gui->addFrame(monster3, (167*2) + 10, 209, 167, 209);
+  gui->addFrame(monster3, (167*3) + 5,  209,  167 + 5, 209);
+
+
+  Animation *monsterAnimation3 = &monster3;
+  AnimatedSprite animatedSprite3(0.2, true, false);
+  animatedSprite3.setPosition(800 / 2 - 300, 600 / 2);
+
 
   float x = 0.f;
   float y = 0.f;
@@ -30,8 +42,9 @@ int		main(int, char *[])
       gui->clear();
       gui->handleEvents();
 
-      gui->updateAnimatedSprite(*monsterAnimation1, animatedSprite1, x, y);
-      gui->updateAnimatedSprite(*monsterAnimation2, animatedSprite2, x, y);
+      gui->updateAnimatedSprite(*monsterAnimation1, animatedSprite1, 200, 0);
+      gui->updateAnimatedSprite(*monsterAnimation2, animatedSprite2, 400, 100);
+      gui->updateAnimatedSprite(*monsterAnimation3, animatedSprite3, 0, 0);
 
       gui->update();
       gui->display();
