@@ -11,6 +11,7 @@
 
 # include		<string>
 # include		<vector>
+# include               "AnimatedSprite.hpp"
 
 class		IGui
 {
@@ -52,8 +53,7 @@ public:
   /*
   ** Dtor
   */
-
-  virtual ~IGui() {}
+  virtual               ~IGui() {}
 
   /** Public Member Functions **/
 
@@ -87,6 +87,21 @@ public:
 				const float x, const float y,
 				const unsigned int hexaColorCode = 0x000000,
 				const float scale = 1.) = 0;
+
+  /*
+  ** Animated Sprites
+  */
+  virtual Animation     loadAnimation(const std::string &path) = 0;
+  virtual void          addFrames(Animation &animation,
+                                  const unsigned int nbFrame,
+                                  const unsigned int x1,
+                                  const unsigned int x2,
+                                  const unsigned int x3,
+                                  const unsigned int x4) = 0;
+  virtual void          updateAnimatedSprite(Animation &currentAnimation,
+                                             AnimatedSprite &animatedSprite,
+                                             const float x,
+                                             const float y) = 0;
 
   /*
   ** Texture methods

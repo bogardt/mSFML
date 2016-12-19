@@ -10,6 +10,7 @@ mSFML_Window::mSFML_Window(const std::string &windowName,
 			   const int winY) : _window(sf::VideoMode(winX, winY), windowName.c_str()),
 					     _winX(winX),
 					     _winY(winY),
+                                             _frameClock(),
 					     _current_key(NONE),
 					     _key_map(
 					   {{sf::Keyboard::Unknown,	IGui::NONE},
@@ -30,6 +31,7 @@ mSFML_Window::mSFML_Window(const std::string &windowName,
 					    {sf::Keyboard::Num9,	IGui::K_9}})
 
 {
+  this->_window.setFramerateLimit(60);
   std::cout << "[mSFML_Window::mSFML_Window] "
 	    << windowName << " "
 	    << winX << "x"
@@ -43,6 +45,7 @@ mSFML_Window::mSFML_Window(const std::string &fontPath,
 			   const int winY) : _window(sf::VideoMode(winX, winY), windowName.c_str()),
 					     _winX(winX),
 					     _winY(winY),
+                                             _frameClock(),
 					     _current_key(NONE),
 					     _key_map(
 					   {{sf::Keyboard::Unknown,	IGui::NONE},
@@ -63,6 +66,7 @@ mSFML_Window::mSFML_Window(const std::string &fontPath,
 					    {sf::Keyboard::Num9,	IGui::K_9}})
 
 {
+  this->_window.setFramerateLimit(60);
   this->loadFont(fontPath);
   std::cout << "[mSFML_Window::mSFML_Window] "
 	    << windowName << " "
@@ -76,7 +80,11 @@ mSFML_Window::~mSFML_Window() {}
 /*
 ** Window
 */
-void			mSFML_Window::update(void) {}
+void			mSFML_Window::update(void)
+{
+  sf::Time frameTime = _frameClock.restart();
+  _frameTime = frameTime;
+}
 
 bool			mSFML_Window::isAlive(void)
 {
@@ -190,6 +198,44 @@ void			mSFML_Window::writeAt(const std::string &msg,
 }
 
 /*
+** Animated Sprite
+*/
+
+Animation               mSFML_Window::loadAnimation(const std::string &path)
+{
+  Animation            animation;
+  const sf::Texture     *texture;
+
+  if ((texture = _manager.load(path)) == NULL)
+    throw std::out_of_range("Failed to load texture " + path);
+  animation.setSpriteSheet(*texture);
+  return (animation);
+}
+
+void                    mSFML_Window::addFrames(Animation &animation,
+                                                const unsigned int nbFrame,
+                                                const unsigned int x1,
+                                                const unsigned int x2,
+                                                const unsigned int x3,
+                                                const unsigned int x4)
+{
+  for (unsigned int i = 0; i < nbFrame; i++)
+    animation.addFrame(i * x1, x2, x3, x4);
+}
+
+void                    mSFML_Window::updateAnimatedSprite(Animation &currentAnimation,
+                                                           AnimatedSprite &animatedSprite,
+                                                           const float x,
+                                                           const float y)
+{
+  animatedSprite.play(currentAnimation);
+  animatedSprite.move(x * _frameTime.asSeconds(), y * _frameTime.asSeconds());
+  animatedSprite.update(_frameTime);
+  this->_window.draw(animatedSprite);
+}
+
+
+/*
 ** Textures
 */
 void			mSFML_Window::setTextureAt(const std::string &path,
@@ -258,7 +304,6 @@ void			mSFML_Window::fillCircle(const unsigned int x,
   circle.setFillColor(sf::Color(rgb[0], rgb[1], rgb[2], 255));
   this->_window.draw(circle);
 }
-
 
 bool		        mSFML_Window::magnetTile(const unsigned int mouseX,
 						 const unsigned int mouseY,

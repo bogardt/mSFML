@@ -60,6 +60,21 @@ public:
 				const float scale = 1.);
 
   /*
+  ** Animated Sprites
+  */
+  virtual Animation     loadAnimation(const std::string &path);
+  virtual void          addFrames(Animation &animation,
+                                  const unsigned int nbFrame,
+                                  const unsigned int x1,
+                                  const unsigned int x2,
+                                  const unsigned int x3,
+                                  const unsigned int x4);
+  virtual void          updateAnimatedSprite(Animation &currentAnimation,
+                                             AnimatedSprite &animatedSprite,
+                                             const float x,
+                                             const float y);
+
+  /*
   ** Texture methods
   */
   virtual void	        setTextureAt(const std::string &path,
@@ -93,6 +108,8 @@ private:
   sf::Font		_font;
   sf::Text		_text;
   sf::Sprite		_sprite;
+  sf::Time              _frameTime;
+  sf::Clock             _frameClock;
   TextureManager	_manager;
   const int		_winX;
   const int		_winY;
