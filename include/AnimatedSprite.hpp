@@ -1,3 +1,7 @@
+//
+// mSFML
+//
+
 #ifndef         __ANIMATED_SPRITE_HPP__
 # define        __ANIMATED_SPRITE_HPP__
 
@@ -15,6 +19,7 @@ public:
         		  const unsigned int nbFrames,
         		  const unsigned int timerTotal,
         		  const unsigned int WidthSprite,
+			  const unsigned int StartHeight,
         		  const unsigned int HeightSprite);
 
   explicit AnimatedSprite(IGui &gui,
@@ -23,6 +28,7 @@ public:
 			  const unsigned int nbFrames,
 			  const unsigned int timerTotal,
 			  const unsigned int WidthSprite,
+			  const unsigned int StartHeight,
 			  const unsigned int HeightSprite,
 			  const unsigned int considerateFrame);
 
@@ -30,9 +36,12 @@ public:
 
   AnimatedSprite &setX(const float x);
   AnimatedSprite &setY(const float y);
-  float  getX() const {return _x;}
-  float  getY() const {return _y;}
-  void		update();
+  AnimatedSprite &setNbFrames(const unsigned int considerateFrame);
+  AnimatedSprite &setInitFrame(const unsigned int considerateFrame);
+  AnimatedSprite &setConsiderateFrame(const unsigned int considerateFrame);
+  float          getX() const;
+  float          getY() const;
+  void		 update();
 
 private:
   IGui		&_gui;
@@ -49,7 +58,7 @@ private:
   unsigned int	_actualTile;
   unsigned int	_actualFrame;
   unsigned int	_considerateFrame;
-
+  unsigned int  _startHeight;
 };
 
 #endif          // __ANIMATED_SPRITE_HPP__
