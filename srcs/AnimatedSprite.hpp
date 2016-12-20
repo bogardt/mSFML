@@ -47,6 +47,7 @@ private:
     const sf::Texture   *_texture;
     sf::Vertex          _vertices[4];
     virtual void        draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
 };
 
 #endif // __ANIMATEDSPRITE_HPP__

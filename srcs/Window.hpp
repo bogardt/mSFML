@@ -2,8 +2,8 @@
 // mSFML
 //
 
-#ifndef		__MSFML__WINDOW__HPP__
-# define	__MSFML__WINDOW__HPP__
+#ifndef		__WINDOW__HPP__
+# define	__WINDOW__HPP__
 
 # include	<SFML/Window.hpp>
 # include	<SFML/Graphics.hpp>
@@ -13,20 +13,17 @@
 # include	"IGui.hpp"
 # include	"TextureManager.hpp"
 
-class		mSFML_Window : public IGui
+class		Window : public IGui
 {
 
 public:
   // classic ctor
-  mSFML_Window(const std::string &name = DEFAULT_WINDOW_NAME,
+  Window(const std::string &name = DEFAULT_WINDOW_NAME,
 	       const int windowX = DEFAULT_WINDOW_X,
-	       const int windowY = DEFAULT_WINDOW_Y);
+	       const int windowY = DEFAULT_WINDOW_Y,
+               const std::string &fontPath = "");
   // font ctor
-  mSFML_Window(const std::string &fontPath,
-	       const std::string &name = DEFAULT_WINDOW_NAME,
-	       const int windowX = DEFAULT_WINDOW_X,
-	       const int windowY = DEFAULT_WINDOW_Y);
-  virtual ~mSFML_Window();
+  virtual ~Window();
 
   /*
   ** Windows methods
@@ -126,4 +123,4 @@ private:
 
 };
 
-#endif		/* __MSFML__WINDOW__HPP__ */
+#endif		/* __WINDOW__HPP__ */

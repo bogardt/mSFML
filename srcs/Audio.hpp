@@ -2,17 +2,17 @@
 // mSFML
 //
 
-#ifndef		_MSFML_AUDIO_HPP_
-# define	_MSFML_AUDIO_HPP_
+#ifndef		_AUDIO_HPP_
+# define	_AUDIO_HPP_
 
 # include	<SFML/Audio.hpp>
 # include	"IAudio.hpp"
 
-class		mSFML_Audio : public IAudio
+class		Audio : public IAudio
 {
 public:
-  mSFML_Audio();
-  virtual ~mSFML_Audio();
+  Audio();
+  virtual ~Audio();
 
   virtual void		loadSound(const std::string &path);
   virtual void		loadMusic(const std::string &path);
@@ -33,4 +33,4 @@ protected:
   sf::Music		_music;
 };
 
-#endif			// _MSFML_AUDIO_HPP_
+#endif			// _AUDIO_HPP_

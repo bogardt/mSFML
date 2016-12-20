@@ -3,107 +3,75 @@
 //
 
 #include <iostream>
-#include "mSFML_Window.hpp"
+#include "Window.hpp"
 
-mSFML_Window::mSFML_Window(const std::string &windowName,
-			   const int winX,
-			   const int winY) : _window(sf::VideoMode(winX, winY), windowName.c_str()),
-					     _winX(winX),
-					     _winY(winY),
-                                             _frameClock(),
-					     _current_key(NONE),
-					     _key_map(
-					   {{sf::Keyboard::Unknown,	IGui::NONE},
-					    {sf::Keyboard::Space,	IGui::SPACE},
-					    {sf::Keyboard::Right,	IGui::RIGHT},
-					    {sf::Keyboard::Left,	IGui::LEFT},
-					    {sf::Keyboard::Up,		IGui::UP},
-					    {sf::Keyboard::Down,	IGui::DOWN},
-					    {sf::Keyboard::Num0,	IGui::K_0},
-					    {sf::Keyboard::Num1,	IGui::K_1},
-					    {sf::Keyboard::Num2,	IGui::K_2},
-					    {sf::Keyboard::Num3,	IGui::K_3},
-					    {sf::Keyboard::Num4,	IGui::K_4},
-					    {sf::Keyboard::Num5,	IGui::K_5},
-					    {sf::Keyboard::Num6,	IGui::K_6},
-					    {sf::Keyboard::Num7,	IGui::K_7},
-					    {sf::Keyboard::Num8,	IGui::K_8},
-					    {sf::Keyboard::Num9,	IGui::K_9}})
+Window::Window(const std::string &windowName,
+               const int winX,
+               const int winY,
+               const std::string &fontPath)
+  : _window(sf::VideoMode(winX, winY), windowName.c_str()),
+    _winX(winX),
+    _winY(winY),
+    _frameClock(),
+    _current_key(NONE),
+    _key_map({{sf::Keyboard::Unknown,	IGui::NONE},
+	     {sf::Keyboard::Space,	IGui::SPACE},
+	     {sf::Keyboard::Right,	IGui::RIGHT},
+	     {sf::Keyboard::Left,	IGui::LEFT},
+	     {sf::Keyboard::Up,		IGui::UP},
+	     {sf::Keyboard::Down,	IGui::DOWN},
+	     {sf::Keyboard::Num0,	IGui::K_0},
+	     {sf::Keyboard::Num1,	IGui::K_1},
+	     {sf::Keyboard::Num2,	IGui::K_2},
+	     {sf::Keyboard::Num3,	IGui::K_3},
+	     {sf::Keyboard::Num4,	IGui::K_4},
+	     {sf::Keyboard::Num5,	IGui::K_5},
+	     {sf::Keyboard::Num6,	IGui::K_6},
+	     {sf::Keyboard::Num7,	IGui::K_7},
+	     {sf::Keyboard::Num8,	IGui::K_8},
+	     {sf::Keyboard::Num9,	IGui::K_9}})
 
 {
   this->_window.setFramerateLimit(60);
-  std::cout << "[mSFML_Window::mSFML_Window] "
+  if (fontPath != "")
+    this->loadFont(fontPath);
+
+  std::cout << "[Window::Window] "
 	    << windowName << " "
 	    << winX << "x"
 	    << winY
 	    << std::endl;
 }
 
-mSFML_Window::mSFML_Window(const std::string &fontPath,
-			   const std::string &windowName,
-			   const int winX,
-			   const int winY) : _window(sf::VideoMode(winX, winY), windowName.c_str()),
-					     _winX(winX),
-					     _winY(winY),
-                                             _frameClock(),
-					     _current_key(NONE),
-					     _key_map(
-					   {{sf::Keyboard::Unknown,	IGui::NONE},
-					    {sf::Keyboard::Space,	IGui::SPACE},
-					    {sf::Keyboard::Right,	IGui::RIGHT},
-					    {sf::Keyboard::Left,	IGui::LEFT},
-					    {sf::Keyboard::Up,		IGui::UP},
-					    {sf::Keyboard::Down,	IGui::DOWN},
-					    {sf::Keyboard::Num0,	IGui::K_0},
-					    {sf::Keyboard::Num1,	IGui::K_1},
-					    {sf::Keyboard::Num2,	IGui::K_2},
-					    {sf::Keyboard::Num3,	IGui::K_3},
-					    {sf::Keyboard::Num4,	IGui::K_4},
-					    {sf::Keyboard::Num5,	IGui::K_5},
-					    {sf::Keyboard::Num6,	IGui::K_6},
-					    {sf::Keyboard::Num7,	IGui::K_7},
-					    {sf::Keyboard::Num8,	IGui::K_8},
-					    {sf::Keyboard::Num9,	IGui::K_9}})
-
-{
-  this->_window.setFramerateLimit(60);
-  this->loadFont(fontPath);
-  std::cout << "[mSFML_Window::mSFML_Window] "
-	    << windowName << " "
-	    << winX << "x"
-	    << winY
-	    << std::endl;
-}
-
-mSFML_Window::~mSFML_Window() {}
+Window::~Window() {}
 
 /*
 ** Window
 */
-void			mSFML_Window::update(void)
+void			Window::update(void)
 {
   _frameTime = _frameClock.restart();
 }
 
-bool			mSFML_Window::isAlive(void)
+bool			Window::isAlive(void)
 {
   return (_window.isOpen());
 }
 
-void			mSFML_Window::display(void)
+void			Window::display(void)
 {
   _window.display();
 }
 
-void			mSFML_Window::clear(void)
+void			Window::clear(void)
 {
-  _window.clear(sf::Color::Black);
+  _window.clear(sf::Color::Blue);
 }
 
 /*
 ** Keyboard Event
 */
-void			mSFML_Window::handleEvents(void)
+void			Window::handleEvents(void)
 {
   sf::Event		event;
 
@@ -144,7 +112,7 @@ void			mSFML_Window::handleEvents(void)
     }
 }
 
-IGui::Key	        mSFML_Window::getKey(void) const
+IGui::Key		Window::getKey(void) const
 {
   return (this->_current_key);
 }
@@ -152,22 +120,22 @@ IGui::Key	        mSFML_Window::getKey(void) const
 /*
 ** Mouse Events
 */
-unsigned int		mSFML_Window::getMouseX(void) const
+unsigned int		Window::getMouseX(void) const
 {
   return (this->_mouse.getPosition(this->_window).x);
 }
 
-unsigned int		mSFML_Window::getMouseY(void) const
+unsigned int		Window::getMouseY(void) const
 {
   return (this->_mouse.getPosition(this->_window).y);
 }
 
-bool			mSFML_Window::buttonLeftIsClicked(void) const
+bool			Window::buttonLeftIsClicked(void) const
 {
   return (this->_mouse.isButtonPressed(sf::Mouse::Button::Left));
 }
 
-bool			mSFML_Window::buttonRightIsClicked(void) const
+bool			Window::buttonRightIsClicked(void) const
 {
   return (this->_mouse.isButtonPressed(sf::Mouse::Button::Right));
 }
@@ -175,12 +143,12 @@ bool			mSFML_Window::buttonRightIsClicked(void) const
 /*
 ** Font
 */
-void			mSFML_Window::loadFont(const std::string &path)
+void			Window::loadFont(const std::string &path)
 {
   this->_font.loadFromFile(path);
 }
 
-void			mSFML_Window::writeAt(const std::string &msg,
+void			Window::writeAt(const std::string &msg,
 					      const float x, const float y,
 					      const unsigned int hexaColorCode,
 					      const float scale)
@@ -200,10 +168,10 @@ void			mSFML_Window::writeAt(const std::string &msg,
 ** Animated Sprite
 */
 
-Animation               mSFML_Window::loadAnimation(const std::string &path)
+Animation		Window::loadAnimation(const std::string &path)
 {
-  Animation            animation;
-  const sf::Texture     *texture;
+  Animation		animation;
+  const sf::Texture	*texture;
 
   if ((texture = _manager.load(path)) == NULL)
     throw std::out_of_range("Failed to load texture " + path);
@@ -211,30 +179,30 @@ Animation               mSFML_Window::loadAnimation(const std::string &path)
   return (animation);
 }
 
-void                    mSFML_Window::addFrames(Animation &animation,
-                                                const unsigned int nbFrame,
-                                                const unsigned int x1,
-                                                const unsigned int x2,
-                                                const unsigned int x3,
-                                                const unsigned int x4)
+void			Window::addFrames(Animation &animation,
+						const unsigned int nbFrame,
+						const unsigned int x1,
+						const unsigned int x2,
+						const unsigned int x3,
+						const unsigned int x4)
 {
   for (unsigned int i = 0; i < nbFrame; i++)
     animation.addFrame(i * x1, x2, x3, x4);
 }
 
-void                    mSFML_Window::addFrame(Animation &animation,
-                                               const unsigned int x1,
-                                               const unsigned int x2,
-                                               const unsigned int x3,
-                                               const unsigned int x4)
+void			Window::addFrame(Animation &animation,
+					       const unsigned int x1,
+					       const unsigned int x2,
+					       const unsigned int x3,
+					       const unsigned int x4)
 {
   animation.addFrame(x1, x2, x3, x4);
 }
 
-void                    mSFML_Window::updateAnimatedSprite(Animation &currentAnimation,
-                                                           AnimatedSprite &animatedSprite,
-                                                           const float x,
-                                                           const float y)
+void			Window::updateAnimatedSprite(Animation &currentAnimation,
+							   AnimatedSprite &animatedSprite,
+							   const float x,
+							   const float y)
 {
   animatedSprite.play(currentAnimation);
   animatedSprite.setPosition(x, y);
@@ -242,8 +210,8 @@ void                    mSFML_Window::updateAnimatedSprite(Animation &currentAni
   this->_window.draw(animatedSprite);
 }
 
-void                    mSFML_Window::moveAnimatedSprite(AnimatedSprite &animatedSprite,
-                                                         const float x, const float y)
+void			Window::moveAnimatedSprite(AnimatedSprite &animatedSprite,
+							 const float x, const float y)
 {
   animatedSprite.move(x * _frameTime.asSeconds(), y * _frameTime.asSeconds());
 }
@@ -251,7 +219,7 @@ void                    mSFML_Window::moveAnimatedSprite(AnimatedSprite &animate
 /*
 ** textures
 */
-void			mSFML_Window::setTextureAt(const std::string &path,
+void			Window::setTextureAt(const std::string &path,
 						   const float x, const float y,
 						   const float scale)
 {
@@ -266,11 +234,11 @@ void			mSFML_Window::setTextureAt(const std::string &path,
   this->_window.draw(sprite);
 }
 
-void			mSFML_Window::setTextureRecAt(const std::string &path,
-                                                      const float x, const float y,
-                                                      const float h1, const float w1,
-                                                      const float h2, const float w2,
-                                                      const float scale)
+void			Window::setTextureRecAt(const std::string &path,
+						      const float x, const float y,
+						      const float h1, const float w1,
+						      const float h2, const float w2,
+						      const float scale)
 {
   sf::Sprite		sprite;
   const sf::Texture	*texture;
@@ -287,7 +255,7 @@ void			mSFML_Window::setTextureRecAt(const std::string &path,
 /*
 ** Fill Rectangle
 */
-void			mSFML_Window::fillRec(const unsigned int x,
+void			Window::fillRec(const unsigned int x,
 					      const unsigned int y,
 					      const unsigned int i,
 					      const unsigned int j,
@@ -303,7 +271,7 @@ void			mSFML_Window::fillRec(const unsigned int x,
   this->_window.draw(rectangle);
 }
 
-void			mSFML_Window::fillCircle(const unsigned int x,
+void			Window::fillCircle(const unsigned int x,
 						 const unsigned int y,
 						 const unsigned int i,
 						 const unsigned int j,
@@ -318,7 +286,7 @@ void			mSFML_Window::fillCircle(const unsigned int x,
   this->_window.draw(circle);
 }
 
-bool		        mSFML_Window::magnetTile(const unsigned int mouseX,
+bool			Window::magnetTile(const unsigned int mouseX,
 						 const unsigned int mouseY,
 						 const unsigned int x,
 						 const unsigned int y,

@@ -3,15 +3,15 @@
 //
 
 # include <iostream>
-# include "mSFML_Audio.hpp"
+# include "Audio.hpp"
 
-mSFML_Audio::mSFML_Audio()
+Audio::Audio()
 {}
 
-mSFML_Audio::~mSFML_Audio()
+Audio::~Audio()
 {}
 
-void		mSFML_Audio::loadSound(const std::string &path)
+void		Audio::loadSound(const std::string &path)
 {
   if (this->_sound.getBuffer())
     this->_sound.resetBuffer();
@@ -27,7 +27,7 @@ void		mSFML_Audio::loadSound(const std::string &path)
   this->_sound.setBuffer(this->_buffer);
 }
 
-void	        mSFML_Audio::loadMusic(const std::string &path)
+void	        Audio::loadMusic(const std::string &path)
 {
   try
     {
@@ -40,42 +40,42 @@ void	        mSFML_Audio::loadMusic(const std::string &path)
     }
 }
 
-void		mSFML_Audio::musicPlay()
+void		Audio::musicPlay()
 {
   this->_music.play();
 }
 
-void	        mSFML_Audio::musicPause()
+void	        Audio::musicPause()
 {
   this->_music.pause();
 }
 
-void		mSFML_Audio::musicStop()
+void		Audio::musicStop()
 {
   this->_music.stop();
 }
 
-void		mSFML_Audio::musicSetVolume(const unsigned int volume)
+void		Audio::musicSetVolume(const unsigned int volume)
 {
   this->_music.setVolume(volume);
 }
 
-void		mSFML_Audio::musicSetLoop(const bool isloop)
+void		Audio::musicSetLoop(const bool isloop)
 {
   this->_music.setLoop(isloop);
 }
 
-void		mSFML_Audio::soundPlay()
+void		Audio::soundPlay()
 {
   this->_sound.play();
 }
 
-void		mSFML_Audio::soundSetVolume(const unsigned int volume)
+void		Audio::soundSetVolume(const unsigned int volume)
 {
   this->_sound.setVolume(volume);
 }
 
-void		mSFML_Audio::soundSetLoop(const bool isloop)
+void		Audio::soundSetLoop(const bool isloop)
 {
   this->_sound.setLoop(isloop);
 }

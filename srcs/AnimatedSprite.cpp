@@ -65,19 +65,17 @@ void            AnimatedSprite::setColor(const sf::Color& color)
   _vertices[3].color = color;
 }
 
-const Animation *AnimatedSprite::getAnimation() const
+const Animation* AnimatedSprite::getAnimation() const
 {
-    return _animation;
+  return _animation;
 }
 
 sf::FloatRect   AnimatedSprite::getLocalBounds() const
 {
-  sf::IntRect rect = _animation->getFrame(_currentFrame);
-
-  float width = static_cast<float>(std::abs(rect.width));
-  float height = static_cast<float>(std::abs(rect.height));
-
-  return sf::FloatRect(0.f, 0.f, width, height);
+  sf::IntRect   rect = _animation->getFrame(_currentFrame);
+  return sf::FloatRect(0.f, 0.f,
+                       static_cast<float>(std::abs(rect.width)),
+                       static_cast<float>(std::abs(rect.height)));
 }
 
 sf::FloatRect   AnimatedSprite::getGlobalBounds() const
@@ -104,21 +102,23 @@ void            AnimatedSprite::setFrame(std::size_t newFrame, bool resetTime)
 {
   if (_animation)
     {
+
       sf::IntRect rect = _animation->getFrame(newFrame);
+      const float left = static_cast<float>(rect.left) + 0.0001f;
+      const float right = left + static_cast<float>(rect.width);
+      const float top = static_cast<float>(rect.top);
+      const float bottom = top + static_cast<float>(rect.height);
+
       _vertices[0].position = sf::Vector2f(0.f, 0.f);
       _vertices[1].position = sf::Vector2f(0.f, static_cast<float>(rect.height));
       _vertices[2].position = sf::Vector2f(static_cast<float>(rect.width), static_cast<float>(rect.height));
       _vertices[3].position = sf::Vector2f(static_cast<float>(rect.width), 0.f);
 
-      float left = static_cast<float>(rect.left) + 0.0001f;
-      float right = left + static_cast<float>(rect.width);
-      float top = static_cast<float>(rect.top);
-      float bottom = top + static_cast<float>(rect.height);
-
       _vertices[0].texCoords = sf::Vector2f(left, top);
       _vertices[1].texCoords = sf::Vector2f(left, bottom);
       _vertices[2].texCoords = sf::Vector2f(right, bottom);
       _vertices[3].texCoords = sf::Vector2f(right, top);
+
     }
 
   if (resetTime)
