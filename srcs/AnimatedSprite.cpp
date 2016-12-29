@@ -125,6 +125,7 @@ void            AnimatedSprite::setFrame(std::size_t newFrame, bool resetTime)
     _currentTime = sf::Time::Zero;
 }
 
+# include <iostream>
 void            AnimatedSprite::update(sf::Time deltaTime)
 {
   if (!_isPaused && _animation)
@@ -134,9 +135,13 @@ void            AnimatedSprite::update(sf::Time deltaTime)
         {
           _currentTime = sf::microseconds(_currentTime.asMicroseconds() % _frameTime.asMicroseconds());
           if (_currentFrame + 1 < _animation->getSize())
-            _currentFrame++;
+            {
+              _currentFrame++;
+              std::cout << "frame has been changed : " << _currentFrame << std::endl;
+            }
           else
             {
+              std::cout << "frame has NOT been changed : " << _currentFrame << std::endl;
               _currentFrame = 0;
               if (!_isLooped)
                 _isPaused = true;
@@ -145,6 +150,27 @@ void            AnimatedSprite::update(sf::Time deltaTime)
         }
     }
 }
+
+// void            AnimatedSprite::update(sf::Time deltaTime)
+// {
+//   if (!_isPaused && _animation)
+//     {
+//       _currentTime += deltaTime;
+//       if (_currentTime >= _frameTime)
+//         {
+//           _currentTime = sf::microseconds(_currentTime.asMicroseconds() % _frameTime.asMicroseconds());
+//           if (_currentFrame + 1 < _animation->getSize())
+//             _currentFrame++;
+//           else
+//             {
+//               _currentFrame = 0;
+//               if (!_isLooped)
+//                 _isPaused = true;
+//             }
+//           setFrame(_currentFrame, false);
+//         }
+//     }
+// }
 
 void            AnimatedSprite::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {

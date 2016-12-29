@@ -200,11 +200,21 @@ void			Window::addFrame(Animation &animation,
 }
 
 void			Window::updateAnimatedSprite(Animation &currentAnimation,
-							   AnimatedSprite &animatedSprite,
-							   const float x,
-							   const float y)
+                                                     AnimatedSprite &animatedSprite,
+                                                     const float x,
+                                                     const float y)
 {
   animatedSprite.play(currentAnimation);
+  animatedSprite.setPosition(x, y);
+  animatedSprite.update(_frameTime);
+  this->_window.draw(animatedSprite);
+}
+
+void			Window::updateAnimatedSprite(AnimatedSprite &animatedSprite,
+                                                     const float x,
+                                                     const float y)
+{
+  animatedSprite.play(*animatedSprite.getAnimation());
   animatedSprite.setPosition(x, y);
   animatedSprite.update(_frameTime);
   this->_window.draw(animatedSprite);

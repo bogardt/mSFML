@@ -74,13 +74,14 @@ int		main(int, char *[])
   float y = 0.f;
   float speed = 80.f;
   unsigned int i = 0;
+  animatedSprite1.setAnimation(monster1);
   while (gui->isAlive())
     {
       gui->clear();
       gui->handleEvents();
       // gui->updateAnimatedSprite(monster2, animatedSprite2, 200, 0);
+      gui->updateAnimatedSprite(animatedSprite1, 210, 40);
       // gui->updateAnimatedSprite(monster1, animatedSprite1, 210, 40);
-
       // monsterAnimation3 = &monster3;
       // gui->updateAnimatedSprite(*monsterAnimation3, animatedSprite3, 400, 200);
       // gui->updateAnimatedSprite(player, animatedSprite4, 500, 300);

@@ -24,8 +24,8 @@ public:
   const sf::IntRect	&getFrame(std::size_t n) const;
 
 private:
-    std::vector<sf::IntRect>	_frames;
-    const sf::Texture		*_texture;
+  std::vector<sf::IntRect>	_frames;
+  const sf::Texture		*_texture;
 };
 
 #endif // __ANIMATION_HPP__

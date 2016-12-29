@@ -107,6 +107,9 @@ public:
                                              AnimatedSprite &animatedSprite,
                                              const float x,
                                              const float y) = 0;
+  virtual void		updateAnimatedSprite(AnimatedSprite &animatedSprite,
+                                             const float x,
+                                             const float y) = 0;
   virtual void          moveAnimatedSprite(AnimatedSprite &animatedSprite,
                                            const float x, const float y) = 0;
 
